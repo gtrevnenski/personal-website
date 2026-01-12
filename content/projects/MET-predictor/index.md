@@ -54,8 +54,11 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
 </div>
 </div>
 </div>
-
-<div class="top-departments" id="topDepartments"></div>
+<div class="updated-since-retrain">
+<div class="updated-value" id="updatedSinceRetrain">Loading...</div>
+<div class="updated-label" id="updatedSinceRetrainPct">Updated since last retrain</div>
+</div>
+<div class="update-info" id="analysisUpdateInfo">Last updated: Loading...</div>
 </div>
 {{< /dashboard >}}
 
@@ -156,7 +159,7 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
   
   .stats-summary {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1.5rem;
     margin-bottom: 2rem;
   }
@@ -247,40 +250,27 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
   .not-on-view-color {
     background: linear-gradient(135deg, #6b7280, #4b5563);
   }
-  
-  .top-departments {
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid #e5e7eb;
-  }
-  
-  .dept-header {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #1f2937;
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-  
-  .dept-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.75rem;
-    margin-bottom: 0.5rem;
-    background: #f9fafb;
-    border-radius: 6px;
-  }
-  
-  .dept-name {
-    font-weight: 500;
-    color: #374151;
-  }
-  
-  .dept-count {
-    font-weight: 600;
-    color: #6b7280;
-  }
+
+.updated-since-retrain {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  text-align: center;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.updated-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.updated-label {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-top: 0.35rem;
+}
   
   .prediction-form-container {
     background: #ffffff;
@@ -552,10 +542,22 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
 </style>
 
 <script>
+  // Base-aware asset URLs for GitHub Pages subpath deployments (no Hugo templating to avoid literal braces)
+  const SITE_BASE = (() => {
+    const url = new URL(window.location.href);
+    const path = url.pathname;
+    const idx = path.indexOf('/projects/');
+    const basePath = idx >= 0 ? path.slice(0, idx + 1) : path;
+    return `${url.origin}${basePath || '/'}`;
+  })();
+  const ANALYSIS_URL = new URL("analysis_stats.json", SITE_BASE).toString();
+  const METRICS_URL = new URL("model_metadata.json", SITE_BASE).toString();
+  const FEATURES_URL = new URL("feature_ranges.json", SITE_BASE).toString();
+
   // Load dataset analysis
   async function loadDataAnalysis() {
     try {
-      const response = await fetch('/analysis_stats.json');
+      const response = await fetch(ANALYSIS_URL);
       const data = await response.json();
       
       // Update summary stats
@@ -572,22 +574,17 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
       document.getElementById('onViewLabel').textContent = onViewPct.toFixed(1) + '%';
       document.getElementById('notOnViewLabel').textContent = notOnViewPct.toFixed(1) + '%';
       
-      // Show top 5 departments
-      const topDepts = data.by_department
-        .sort((a, b) => b.count - a.count)
-        .slice(0, 5);
+      // Updated since last retrain
+      const updatedCount = data.updated_since_retrain?.count ?? 0;
+      const updatedPct = data.updated_since_retrain?.percentage ?? 0;
+      const retrainDate = data.updated_since_retrain?.last_retrain_date || '2025-10-19';
+      document.getElementById('updatedSinceRetrain').textContent = updatedCount.toLocaleString();
+      document.getElementById('updatedSinceRetrainPct').textContent =
+        `${updatedPct.toFixed(2)}% since retrain (${retrainDate})`;
       
-      const deptHTML = `
-        <div class="dept-header">Top 5 Departments by Collection Size</div>
-        ${topDepts.map(dept => `
-          <div class="dept-item">
-            <span class="dept-name">${dept.department}</span>
-            <span class="dept-count">${dept.count.toLocaleString()} items</span>
-          </div>
-        `).join('')}
-      `;
-      
-      document.getElementById('topDepartments').innerHTML = deptHTML;
+      const analysisUpdated = new Date(data.last_updated || '2025-10-19');
+      document.getElementById('analysisUpdateInfo').textContent =
+        `Last updated: ${analysisUpdated.toLocaleDateString()}`;
       
     } catch (error) {
       console.error('Failed to load data analysis:', error);
@@ -599,7 +596,7 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
   // Load model metrics
   async function loadMetrics() {
     try {
-      const response = await fetch('/model_metadata.json');
+      const response = await fetch(METRICS_URL);
       const data = await response.json();
       
       const metrics = [
@@ -636,7 +633,7 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
   
   async function loadFeatureRanges() {
     try {
-      const response = await fetch('/feature_ranges.json');
+      const response = await fetch(FEATURES_URL);
       featureRanges = await response.json();
       setupDropdowns();
     } catch (error) {

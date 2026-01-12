@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-12-29T17:38:31.475728",
+  "last_updated": "2025-10-19T00:00:00Z",
   "total_items": 485385,
   "accuracy": 0.9772757707798964,
   "distribution": {
@@ -7,6 +7,11 @@
     "not_on_view": 432923,
     "on_view_percentage": 10.80832741020015,
     "not_on_view_percentage": 89.19167258979985
+  },
+  "updated_since_retrain": {
+    "count": 0,
+    "percentage": 0.0,
+    "last_retrain_date": "2025-10-19"
   },
   "by_department": [
     {
