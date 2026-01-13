@@ -16,9 +16,13 @@ import json
 import os
 import sys
 from pathlib import Path
+from datetime import datetime, timezone
 from typing import Iterable
 
 import requests
+
+DEFAULT_LAST_RETRAIN_DATE = "2025-10-19"
+
 
 
 def get_env(name: str, default: str | None = None) -> str:
@@ -59,6 +63,9 @@ def update_analysis_files(
             "last_retrain_date": last_retrain_date,
         }
 
+        # Reflect when the dataset snapshot was refreshed (not model retrain date)
+        data["last_updated"] = datetime.now(timezone.utc).isoformat()
+
         with path.open("w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
             f.write("\n")
@@ -66,7 +73,7 @@ def update_analysis_files(
 
 
 def main() -> int:
-    last_retrain_date = get_env("LAST_RETRAIN_DATE")
+    last_retrain_date = get_env("LAST_RETRAIN_DATE", DEFAULT_LAST_RETRAIN_DATE)
     api_base = os.getenv("MET_API_BASE", "https://collectionapi.metmuseum.org")
 
     output_paths_env = os.getenv("OUTPUT_PATHS")

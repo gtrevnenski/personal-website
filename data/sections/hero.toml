@@ -6,6 +6,6 @@ text2  = "Georgi"
 avatar = "img/profile_pic.png"
 
 title3 = "Learner"
-text3  = "My interests sit at the intersection of Data, Machine Learning, and Research. I’m committed to working end to end, turning raw data into clear insights."
+text3  = "My interests sit at the intersection of Data, AI, and Research. I’m committed to working end to end, turning raw data into clear insights."
 
-description = "My experience bridges Software Engineering, Data Science, and Multimodal Machine Learning. A strong computer science background has allowed me to produce efficient and maintainable ML solutions in the fintech industry, both as part of larger software systems and as containerized standalone applications. My academic training as an MSc graduate from TU Delft gave me a rigorous research foundation and domain knowledge in bioinformatics, applied in a deep learning project on protein binding prediction."
+description = "My experience bridges Software Engineering, Data Science, and Machine Learning. A strong computer science background has allowed me to produce efficient and maintainable ML solutions in the fintech industry, both as part of larger software systems and as containerized standalone applications. My academic training as an MSc graduate from TU Delft gave me a rigorous research foundation and domain knowledge in bioinformatics, applied in a deep learning project on protein binding prediction."

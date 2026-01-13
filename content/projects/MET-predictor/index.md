@@ -55,8 +55,11 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
 </div>
 </div>
 <div class="updated-since-retrain">
-<div class="updated-value" id="updatedSinceRetrain">Loading...</div>
-<div class="updated-label" id="updatedSinceRetrainPct">Updated since last retrain</div>
+<div class="updated-value">
+<span id="updatedSinceRetrain">Loading...</span>
+<span class="updated-percent" id="updatedSinceRetrainPercent">--%</span>
+</div>
+<div class="updated-label" id="updatedSinceRetrainLabel">New and updated pieces since last retrain</div>
 </div>
 <div class="update-info" id="analysisUpdateInfo">Last updated: Loading...</div>
 </div>
@@ -261,13 +264,22 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
 }
 
 .updated-value {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.updated-percent {
   font-size: 1.4rem;
   font-weight: 700;
   color: #1f2937;
 }
 
 .updated-label {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #6b7280;
   margin-top: 0.35rem;
 }
@@ -579,8 +591,10 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
       const updatedPct = data.updated_since_retrain?.percentage ?? 0;
       const retrainDate = data.updated_since_retrain?.last_retrain_date || '2025-10-19';
       document.getElementById('updatedSinceRetrain').textContent = updatedCount.toLocaleString();
-      document.getElementById('updatedSinceRetrainPct').textContent =
-        `${updatedPct.toFixed(2)}% since retrain (${retrainDate})`;
+      document.getElementById('updatedSinceRetrainPercent').textContent =
+        `(${updatedPct.toFixed(2)}%)`;
+      document.getElementById('updatedSinceRetrainLabel').textContent =
+        `New and updated pieces since last retrain (${retrainDate})`;
       
       const analysisUpdated = new Date(data.last_updated || '2025-10-19');
       document.getElementById('analysisUpdateInfo').textContent =

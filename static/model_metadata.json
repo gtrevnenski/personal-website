@@ -1,136 +1,143 @@
 {
   "version": "1.0",
-  "last_updated": "2025-12-29T16:49:02.386773",
+  "last_updated": "2026-01-13T22:10:19.414597",
   "model_type": "CatBoost Classifier",
-  "num_features": 1026,
+  "num_features": 391,
+  "categorical_features": [
+    "department",
+    "country",
+    "cat1",
+    "subcat1",
+    "cat2"
+  ],
   "metrics": {
-    "accuracy": 0.963067245357653,
-    "precision": 0.8214197071233557,
-    "recall": 0.8411488117931122,
-    "f1_score": 0.8311672003516042,
-    "auc_roc": 0.9852976034827026,
-    "auc_pr": 0.9037717709642252
+    "accuracy": 0.970854851115262,
+    "precision": 0.8530532006388991,
+    "recall": 0.8823230397763375,
+    "f1_score": 0.8674412793603199,
+    "auc_roc": 0.9909416951272009,
+    "auc_pr": 0.9403754710067067
   },
   "top_features": [
     {
+      "name": "department",
+      "importance": 7.9608632537591255
+    },
+    {
+      "name": "cat1",
+      "importance": 6.879787413672175
+    },
+    {
+      "name": "cat2",
+      "importance": 4.436049691536566
+    },
+    {
       "name": "objectEndDate",
-      "importance": 7.488980288138236
+      "importance": 3.472831405430739
     },
     {
-      "name": "objectBeginDate",
-      "importance": 4.2865552535863936
+      "name": "emb_319",
+      "importance": 1.8806944572484967
     },
     {
-      "name": "emb_925",
-      "importance": 1.001548852846945
+      "name": "country",
+      "importance": 1.3530584003004127
     },
     {
-      "name": "emb_161",
-      "importance": 0.9592205879440319
+      "name": "emb_264",
+      "importance": 1.0301375392146985
     },
     {
-      "name": "emb_239",
-      "importance": 0.953607607171146
+      "name": "emb_312",
+      "importance": 0.9775863625610293
     },
     {
-      "name": "emb_481",
-      "importance": 0.9283216912003145
+      "name": "emb_22",
+      "importance": 0.9681126687172527
     },
     {
-      "name": "emb_640",
-      "importance": 0.9038656923774167
+      "name": "emb_349",
+      "importance": 0.7938914990947427
     },
     {
-      "name": "emb_313",
-      "importance": 0.886934613329033
+      "name": "emb_263",
+      "importance": 0.7932832440894837
     },
     {
-      "name": "emb_792",
-      "importance": 0.8329992693636633
+      "name": "subcat1",
+      "importance": 0.7534013594063518
     },
     {
-      "name": "emb_332",
-      "importance": 0.7351731759050089
+      "name": "emb_104",
+      "importance": 0.745030639974419
     },
     {
-      "name": "emb_418",
-      "importance": 0.7288912164035436
+      "name": "emb_228",
+      "importance": 0.7405039820591344
     },
     {
-      "name": "emb_202",
-      "importance": 0.600691929167629
+      "name": "emb_116",
+      "importance": 0.633025320070514
     },
     {
-      "name": "emb_333",
-      "importance": 0.5736676589012856
+      "name": "emb_24",
+      "importance": 0.6317581760317889
     },
     {
-      "name": "emb_488",
-      "importance": 0.5574482434086625
+      "name": "emb_127",
+      "importance": 0.6310933993530874
     },
     {
-      "name": "emb_118",
-      "importance": 0.5397148039184144
+      "name": "emb_97",
+      "importance": 0.6188275237743035
     },
     {
-      "name": "emb_830",
-      "importance": 0.5243625068155463
+      "name": "has_country",
+      "importance": 0.6063746309435536
     },
     {
-      "name": "emb_966",
-      "importance": 0.4889850257782507
+      "name": "emb_203",
+      "importance": 0.6057122042879335
     },
     {
-      "name": "emb_675",
-      "importance": 0.47946845031967084
+      "name": "emb_335",
+      "importance": 0.5815834438425235
     },
     {
-      "name": "emb_334",
-      "importance": 0.43105434319925534
+      "name": "emb_40",
+      "importance": 0.577557980586531
     },
     {
-      "name": "emb_30",
-      "importance": 0.42918987418161475
+      "name": "emb_71",
+      "importance": 0.5771271420420364
     },
     {
-      "name": "emb_111",
-      "importance": 0.42412825367802753
+      "name": "emb_267",
+      "importance": 0.5667810554380829
     },
     {
-      "name": "emb_870",
-      "importance": 0.4153960717081352
+      "name": "emb_10",
+      "importance": 0.5461561617430547
     },
     {
-      "name": "emb_873",
-      "importance": 0.40625195025409305
+      "name": "emb_98",
+      "importance": 0.5300927663319326
     },
     {
-      "name": "emb_644",
-      "importance": 0.3998733894720797
+      "name": "emb_248",
+      "importance": 0.5199652396292667
     },
     {
-      "name": "emb_341",
-      "importance": 0.3995588367187108
+      "name": "emb_125",
+      "importance": 0.5171461469431164
     },
     {
-      "name": "emb_39",
-      "importance": 0.39736472430613695
+      "name": "emb_258",
+      "importance": 0.5141037178252642
     },
     {
-      "name": "emb_668",
-      "importance": 0.39704417794440483
-    },
-    {
-      "name": "emb_303",
-      "importance": 0.3963634171619341
-    },
-    {
-      "name": "emb_868",
-      "importance": 0.39531854328124405
-    },
-    {
-      "name": "emb_611",
-      "importance": 0.39453589513816195
+      "name": "emb_286",
+      "importance": 0.5127268289435754
     }
   ]
 }
