@@ -85,53 +85,56 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
 
 <div class="form-row">
 <div class="form-group">
-<label for="departmentInput">Department *</label>
+<label for="departmentInput">Department</label>
 <div class="custom-select">
-<input type="text" id="departmentInput" name="department" placeholder="Search departments..." autocomplete="off" required>
+<input type="text" id="departmentInput" name="department" placeholder="Search departments..." autocomplete="off">
 <div class="dropdown-list" id="departmentList"></div>
 </div>
 </div>
 
 <div class="form-group">
-<label for="classificationInput">Classification *</label>
+<label for="countryInput">Country</label>
 <div class="custom-select">
-<input type="text" id="classificationInput" name="classification" placeholder="Search classifications..." autocomplete="off" required>
-<div class="dropdown-list" id="classificationList"></div>
+<input type="text" id="countryInput" name="country" placeholder="Search countries..." autocomplete="off">
+<div class="dropdown-list" id="countryList"></div>
 </div>
 </div>
 </div>
 
 <div class="form-row">
 <div class="form-group">
-<label for="cultureInput">Culture *</label>
+<label for="cat1Input">Category 1</label>
 <div class="custom-select">
-<input type="text" id="cultureInput" name="culture" placeholder="Search cultures..." autocomplete="off" required>
-<div class="dropdown-list" id="cultureList"></div>
+<input type="text" id="cat1Input" name="cat1" placeholder="Search primary categories..." autocomplete="off">
+<div class="dropdown-list" id="cat1List"></div>
 </div>
 </div>
 
 <div class="form-group">
-<label for="mediumInput">Medium *</label>
+<label for="subcat1Input">Subcategory</label>
 <div class="custom-select">
-<input type="text" id="mediumInput" name="medium" placeholder="Search mediums..." autocomplete="off" required>
-<div class="dropdown-list" id="mediumList"></div>
+<input type="text" id="subcat1Input" name="subcat1" placeholder="Search subcategories..." autocomplete="off">
+<div class="dropdown-list" id="subcat1List"></div>
 </div>
 </div>
 </div>
 
 <div class="form-row">
 <div class="form-group">
-<label for="beginDateInput">Object Begin Date *</label>
-<input type="number" id="beginDateInput" name="objectBeginDate" placeholder="e.g., 1850" required>
-<small>Range: -400000 to 5000</small>
+<label for="cat2Input">Category 2</label>
+<div class="custom-select">
+<input type="text" id="cat2Input" name="cat2" placeholder="Search secondary categories..." autocomplete="off">
+<div class="dropdown-list" id="cat2List"></div>
+</div>
 </div>
 
 <div class="form-group">
-<label for="endDateInput">Object End Date *</label>
-<input type="number" id="endDateInput" name="objectEndDate" placeholder="e.g., 1860" required>
-<small>Range: -240000 to 2870</small>
+<label for="endDateInput">Object End Date</label>
+<input type="number" id="endDateInput" name="objectEndDate" placeholder="e.g., 1860">
 </div>
 </div>
+
+<p class="form-hint form-hint-center">Fields without * are optional—leave blank if unknown.</p>
 
 <button type="submit" class="submit-btn">Predict Display Likelihood</button>
 </form>
@@ -411,6 +414,17 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
     cursor: not-allowed;
     transform: none;
   }
+
+  .form-hint {
+    margin-top: 0;
+    margin-bottom: 0.95rem;
+    font-size: 0.85rem;
+    color: #6b7280;
+  }
+
+  .form-hint-center {
+    text-align: center;
+  }
   
   .prediction-result {
     margin-top: 2rem;
@@ -562,6 +576,9 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
     const basePath = idx >= 0 ? path.slice(0, idx + 1) : path;
     return `${url.origin}${basePath || '/'}`;
   })();
+  const API_BASE = window.location.origin.includes('localhost')
+    ? 'http://localhost:8000'
+    : 'http://localhost:8000'; // adjust to deployed API host if needed
   const ANALYSIS_URL = new URL("analysis_stats.json", SITE_BASE).toString();
   const METRICS_URL = new URL("model_metadata.json", SITE_BASE).toString();
   const FEATURES_URL = new URL("feature_ranges.json", SITE_BASE).toString();
@@ -657,9 +674,10 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
   
   function setupDropdowns() {
     createDropdown('departmentInput', 'departmentList', featureRanges.department);
-    createDropdown('classificationInput', 'classificationList', featureRanges.classification);
-    createDropdown('cultureInput', 'cultureList', featureRanges.culture);
-    createDropdown('mediumInput', 'mediumList', featureRanges.medium);
+    createDropdown('countryInput', 'countryList', featureRanges.country);
+    createDropdown('cat1Input', 'cat1List', featureRanges.cat1);
+    createDropdown('subcat1Input', 'subcat1List', featureRanges.subcat1);
+    createDropdown('cat2Input', 'cat2List', featureRanges.cat2);
   }
   
   function createDropdown(inputId, listId, options) {
@@ -726,38 +744,27 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
     submitBtn.disabled = true;
     submitBtn.textContent = 'Predicting...';
     
-    const formData = {
+    const endDateRaw = document.getElementById('endDateInput').value;
+    const country = document.getElementById('countryInput').value.trim();
+    const payload = {
       text: document.getElementById('textInput').value,
-      department: document.getElementById('departmentInput').value,
-      classification: document.getElementById('classificationInput').value,
-      culture: document.getElementById('cultureInput').value,
-      medium: document.getElementById('mediumInput').value,
-      objectBeginDate: parseInt(document.getElementById('beginDateInput').value),
-      objectEndDate: parseInt(document.getElementById('endDateInput').value)
+      department: valueOrNull(document.getElementById('departmentInput').value),
+      country: valueOrNull(country),
+      has_country: country ? true : false,
+      cat1: valueOrNull(document.getElementById('cat1Input').value),
+      subcat1: valueOrNull(document.getElementById('subcat1Input').value),
+      cat2: valueOrNull(document.getElementById('cat2Input').value),
+      objectEndDate: valueOrNull(parseInt(endDateRaw, 10))
     };
     
-    // Validate dates
-    if (formData.objectBeginDate < -400000 || formData.objectBeginDate > 5000) {
-      alert('Object Begin Date must be between -400000 and 5000');
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Predict Display Likelihood';
-      return;
-    }
-    
-    if (formData.objectEndDate < -240000 || formData.objectEndDate > 2870) {
-      alert('Object End Date must be between -240000 and 2870');
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Predict Display Likelihood';
-      return;
-    }
-    
     try {
-      const response = await fetch('http://localhost:8000/predict', {
+      console.log('Sending payload to API:', payload);
+      const response = await fetch(`${API_BASE}/predict`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(payload)
       });
       
       if (response.ok) {
@@ -768,12 +775,20 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
         displayResult({ error: error || 'Failed to get prediction' }, false);
       }
     } catch (error) {
+      console.error('Prediction request failed:', error);
       displayResult({ error: 'Failed to connect to API. Make sure the server is running on localhost:8000.' }, false);
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Predict Display Likelihood';
     }
   });
+
+  function valueOrNull(val) {
+    if (val === undefined || val === null) return null;
+    if (typeof val === 'number' && Number.isNaN(val)) return null;
+    if (typeof val === 'string' && val.trim() === '') return null;
+    return val;
+  }
   
   function displayResult(result, success) {
     const resultDiv = document.getElementById('predictionResult');
@@ -781,14 +796,15 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
     resultDiv.className = 'prediction-result ' + (success ? 'success' : 'error');
     
     if (success) {
+      const prediction = (result.prediction || '').replace('_', '-');
       resultDiv.innerHTML = `
         <div class="result-title">Prediction Result</div>
         <div class="result-item">
           <span class="result-label">Prediction:</span>
-          <span class="result-value">${result.prediction === 'on_view' ? '✓ Likely On Display' : '✗ Likely In Storage'}</span>
+          <span class="result-value">${prediction === 'on-view' ? '✓ Likely To Be On Display' : '✗ Unlikely To Be On Display'}</span>
         </div>
         <div class="result-item">
-          <span class="result-label">Probability:</span>
+          <span class="result-label">Probability of Display:</span>
           <span class="result-value">${(result.probability * 100).toFixed(2)}%</span>
         </div>
         <div class="result-item">
