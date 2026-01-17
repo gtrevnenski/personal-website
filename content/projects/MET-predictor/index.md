@@ -576,9 +576,7 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
     const basePath = idx >= 0 ? path.slice(0, idx + 1) : path;
     return `${url.origin}${basePath || '/'}`;
   })();
-  const API_BASE = window.location.origin.includes('localhost')
-    ? 'http://localhost:8000'
-    : 'http://localhost:8000'; // adjust to deployed API host if needed
+  const API_BASE = 'https://met-art-display-predictor-lrl5veikwq-ew.a.run.app';
   const ANALYSIS_URL = new URL("analysis_stats.json", SITE_BASE).toString();
   const METRICS_URL = new URL("model_metadata.json", SITE_BASE).toString();
   const FEATURES_URL = new URL("feature_ranges.json", SITE_BASE).toString();

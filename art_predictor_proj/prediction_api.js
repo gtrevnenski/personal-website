@@ -4,7 +4,7 @@
  */
 
 // Configuration
-const API_URL = "https://your-service-url.run.app";  // Update after deployment
+const API_URL = "https://met-art-display-predictor-lrl5veikwq-ew.a.run.app";
 const API_TIMEOUT = 5000; // 5 seconds
 
 /**
