@@ -798,15 +798,6 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
       const probabilityValue = Number.isFinite(result.probability) ? result.probability : null;
       const thresholdValue = Number.isFinite(result.threshold) ? result.threshold : 0.682;
       const thresholdPct = thresholdValue === null ? null : (thresholdValue * 100).toFixed(2);
-      const marginPct = (probabilityValue === null || thresholdValue === null)
-        ? null
-        : ((probabilityValue - thresholdValue) * 100).toFixed(2);
-      const adjustedProbability = (probabilityValue === null || thresholdValue === null)
-        ? null
-        : Math.min(1, Math.max(0, 0.5 + (probabilityValue - thresholdValue)));
-      const adjustedProbabilityPct = adjustedProbability === null
-        ? null
-        : (adjustedProbability * 100).toFixed(2);
       const probabilityPct = probabilityValue === null ? 'N/A' : (probabilityValue * 100).toFixed(2);
       resultDiv.innerHTML = `
         <div class="result-title">Prediction Result</div>
@@ -815,8 +806,8 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
           <span class="result-value">${prediction === 'on-view' ? '✓ Likely To Be On Display' : '✗ Unlikely To Be On Display'}</span>
         </div>
         <div class="result-item">
-          <span class="result-label">Display score:</span>
-          <span class="result-value">${adjustedProbabilityPct ?? probabilityPct}%</span>
+          <span class="result-label">Confidence score:</span>
+          <span class="result-value">${probabilityPct}%</span>
         </div>
         ${thresholdPct === null ? '' : `
         <div class="result-item">
@@ -824,17 +815,10 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
           <span class="result-value">${thresholdPct}%</span>
         </div>
         `}
-        ${marginPct === null ? '' : `
-        <div class="result-item">
-          <span class="result-label">Margin vs threshold:</span>
-          <span class="result-value">${Number(marginPct) >= 0 ? '+' : ''}${marginPct}%</span>
-        </div>
-        `}
         <div class="result-item">
           <span class="result-label">Confidence:</span>
           <span class="result-value">${result.confidence}</span>
         </div>
-        ${result.explanation ? `<div class="result-explanation">${result.explanation}</div>` : ''}
       `;
     } else {
       resultDiv.innerHTML = `

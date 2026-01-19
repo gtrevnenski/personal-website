@@ -5,8 +5,6 @@ date: 2023-11-12
 draft: false
 description: "Transformer-based lane detection that leverages spatiotemporal information from sequential video frames to robustly dynamic road conditions"
 tags: ["Computer Vision", "Deep Learning", "Transformers"]
-images:
-  - "model_architecture.jpg"
 ---
 
 <style>
@@ -119,6 +117,219 @@ images:
   font-weight: 700;
   font-size: 1.3rem;
 }
+
+.lane-gallery-section {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.lane-figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.lane-figure figcaption {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.lane-lightbox-trigger {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  text-decoration: none;
+}
+
+.lane-lightbox-trigger img,
+.lane-lightbox-trigger object {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.lane-architecture {
+  width: min(100%, 720px);
+}
+
+.lane-thumb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  justify-items: center;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.lane-thumb {
+  width: 120px;
+  aspect-ratio: 1 / 1;
+}
+
+.lane-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.lane-pdf-preview {
+  width: min(100%, 180px);
+}
+
+.lane-pdf-thumb {
+  width: 100%;
+  aspect-ratio: 1 / 1.414;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 2px solid #cbd5e1;
+}
+
+.lane-pdf-thumb:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+.lane-pdf-icon {
+  font-size: 5rem;
+  color: #64748b;
+}
+
+.lane-pdf-text {
+  text-align: center;
+  color: #334155;
+}
+
+.lane-pdf-title {
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 0.15rem;
+}
+
+.lane-pdf-subtitle {
+  font-size: 0.7rem;
+  color: #64748b;
+}
+
+.lane-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+  z-index: 9999;
+}
+
+.lane-lightbox:target {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lane-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+}
+
+.lane-lightbox-content {
+  position: relative;
+  max-width: min(95vw, 1400px);
+  max-height: 95vh;
+  background: #0f172a;
+  border-radius: 16px;
+  padding: 2.5rem 2rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.lane-lightbox-media {
+  max-width: 100%;
+  max-height: 85vh;
+  border-radius: 12px;
+}
+
+.lane-lightbox-pdf {
+  width: min(93vw, 1350px);
+  height: 85vh;
+  border: none;
+  border-radius: 12px;
+}
+
+.lane-lightbox-caption {
+  color: #e2e8f0;
+  font-size: 0.95rem;
+}
+
+.lane-lightbox-close {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.75rem;
+  background: transparent;
+  border: none;
+  color: #e2e8f0;
+  font-size: 2rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.lane-lightbox-download {
+  align-self: flex-start;
+  color: #38bdf8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.lane-lightbox-download:hover {
+  text-decoration: underline;
+}
+
+.lane-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(15, 23, 42, 0.8);
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e2e8f0;
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.lane-lightbox-nav:hover {
+  background: rgba(15, 23, 42, 1);
+}
+
+.lane-lightbox-nav-left {
+  left: 0.75rem;
+}
+
+.lane-lightbox-nav-right {
+  right: 0.75rem;
+}
 </style>
 
 <div class="lane-section">
@@ -147,4 +358,117 @@ Improve robustness of lane detection through leveraging spatiotemporal context f
 <li>Delivered a validated proof-of-concept under strict hardware constraints.</li>
 </ul>
 </div>
+
+{{< dashboard >}}
+<div class="lane-gallery-section" id="lane-gallery">
+  <figure class="lane-figure lane-architecture">
+    <a class="lane-lightbox-trigger" href="#lane-lightbox-architecture">
+      <img src="/projects/lane-detection/model_architecture.jpg" alt="Transformer-based lane detection architecture" />
+    </a>
+    <figcaption>Architecture caption placeholder</figcaption>
+  </figure>
+
+  <figure class="lane-figure">
+    <div class="lane-thumb-grid">
+      <div class="lane-thumb">
+        <a class="lane-lightbox-trigger" href="#lane-lightbox-sample-1">
+          <img src="/projects/lane-detection/lane_1.png" alt="Lane detection sample 1" />
+        </a>
+      </div>
+      <div class="lane-thumb">
+        <a class="lane-lightbox-trigger" href="#lane-lightbox-sample-2">
+          <img src="/projects/lane-detection/lane_2.png" alt="Lane detection sample 2" />
+        </a>
+      </div>
+      <div class="lane-thumb">
+        <a class="lane-lightbox-trigger" href="#lane-lightbox-sample-3">
+          <img src="/projects/lane-detection/lane_3.png" alt="Lane detection sample 3" />
+        </a>
+      </div>
+      <div class="lane-thumb">
+        <a class="lane-lightbox-trigger" href="#lane-lightbox-sample-4">
+          <img src="/projects/lane-detection/lane_4.png" alt="Lane detection sample 4" />
+        </a>
+      </div>
+    </div>
+    <figcaption style="text-align: center;">Lane detection samples caption placeholder</figcaption>
+  </figure>
+
+  <figure class="lane-figure lane-pdf-preview">
+    <a class="lane-lightbox-trigger" href="#lane-lightbox-pdf">
+      <div class="lane-pdf-thumb">
+        <div class="lane-pdf-icon">📄</div>
+        <div class="lane-pdf-text">
+          <div class="lane-pdf-title">Project Report</div>
+          <div class="lane-pdf-subtitle">Click to view PDF</div>
+        </div>
+      </div>
+    </a>
+    <figcaption>Robust Lane Detection - Final Report</figcaption>
+  </figure>
+</div>
+{{< /dashboard >}}
+</div>
+
+<div class="lane-lightbox" id="lane-lightbox-architecture" aria-hidden="true">
+  <a class="lane-lightbox-backdrop" href="#lane-gallery" aria-label="Close"></a>
+  <div class="lane-lightbox-content" role="dialog" aria-modal="true">
+    <a class="lane-lightbox-close" href="#lane-gallery" aria-label="Close">×</a>
+    <img class="lane-lightbox-media" src="/projects/lane-detection/model_architecture.jpg" alt="Transformer-based lane detection architecture" />
+    <div class="lane-lightbox-caption">Architecture caption placeholder</div>
+  </div>
+</div>
+
+<div class="lane-lightbox" id="lane-lightbox-sample-1" aria-hidden="true">
+  <a class="lane-lightbox-backdrop" href="#lane-gallery" aria-label="Close"></a>
+  <div class="lane-lightbox-content" role="dialog" aria-modal="true">
+    <a class="lane-lightbox-close" href="#lane-gallery" aria-label="Close">×</a>
+    <a class="lane-lightbox-nav lane-lightbox-nav-right" href="#lane-lightbox-sample-2" aria-label="Next">›</a>
+    <img class="lane-lightbox-media" src="/projects/lane-detection/lane_1.png" alt="Lane detection sample 1" />
+    <div class="lane-lightbox-caption">Lane sample 1 caption placeholder</div>
+  </div>
+</div>
+
+<div class="lane-lightbox" id="lane-lightbox-sample-2" aria-hidden="true">
+  <a class="lane-lightbox-backdrop" href="#lane-gallery" aria-label="Close"></a>
+  <div class="lane-lightbox-content" role="dialog" aria-modal="true">
+    <a class="lane-lightbox-close" href="#lane-gallery" aria-label="Close">×</a>
+    <a class="lane-lightbox-nav lane-lightbox-nav-left" href="#lane-lightbox-sample-1" aria-label="Previous">‹</a>
+    <a class="lane-lightbox-nav lane-lightbox-nav-right" href="#lane-lightbox-sample-3" aria-label="Next">›</a>
+    <img class="lane-lightbox-media" src="/projects/lane-detection/lane_2.png" alt="Lane detection sample 2" />
+    <div class="lane-lightbox-caption">Lane sample 2 caption placeholder</div>
+  </div>
+</div>
+
+<div class="lane-lightbox" id="lane-lightbox-sample-3" aria-hidden="true">
+  <a class="lane-lightbox-backdrop" href="#lane-gallery" aria-label="Close"></a>
+  <div class="lane-lightbox-content" role="dialog" aria-modal="true">
+    <a class="lane-lightbox-close" href="#lane-gallery" aria-label="Close">×</a>
+    <a class="lane-lightbox-nav lane-lightbox-nav-left" href="#lane-lightbox-sample-2" aria-label="Previous">‹</a>
+    <a class="lane-lightbox-nav lane-lightbox-nav-right" href="#lane-lightbox-sample-4" aria-label="Next">›</a>
+    <img class="lane-lightbox-media" src="/projects/lane-detection/lane_3.png" alt="Lane detection sample 3" />
+    <div class="lane-lightbox-caption">Lane sample 3 caption placeholder</div>
+  </div>
+</div>
+
+<div class="lane-lightbox" id="lane-lightbox-sample-4" aria-hidden="true">
+  <a class="lane-lightbox-backdrop" href="#lane-gallery" aria-label="Close"></a>
+  <div class="lane-lightbox-content" role="dialog" aria-modal="true">
+    <a class="lane-lightbox-close" href="#lane-gallery" aria-label="Close">×</a>
+    <a class="lane-lightbox-nav lane-lightbox-nav-left" href="#lane-lightbox-sample-3" aria-label="Previous">‹</a>
+    <img class="lane-lightbox-media" src="/projects/lane-detection/lane_4.png" alt="Lane detection sample 4" />
+    <div class="lane-lightbox-caption">Lane sample 4 caption placeholder</div>
+  </div>
+</div>
+
+<div class="lane-lightbox" id="lane-lightbox-pdf" aria-hidden="true">
+  <a class="lane-lightbox-backdrop" href="#lane-gallery" aria-label="Close"></a>
+  <div class="lane-lightbox-content" role="dialog" aria-modal="true">
+    <a class="lane-lightbox-close" href="#lane-gallery" aria-label="Close">×</a>
+    <iframe class="lane-lightbox-pdf"
+      src="/projects/lane-detection/_IAAIP____Robust_Lane_Detection.pdf#page=1&view=FitH&zoom=page-width&toolbar=0&navpanes=0&scrollbar=0"
+      title="PDF preview"></iframe>
+    <a class="lane-lightbox-download" href="/projects/lane-detection/_IAAIP____Robust_Lane_Detection.pdf" download>Download PDF</a>
+    <div class="lane-lightbox-caption">PDF caption placeholder</div>
+  </div>
 </div>

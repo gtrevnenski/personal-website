@@ -6,8 +6,6 @@ draft: false
 description: "Modality-fusion strategies for a transformer predicting enzyme-substrate interactions"
 tags: ["Bioinformatics", "Deep Learning", "Modality Fusion"]
 github: "https://github.com/gtrevnenski/MuMoTEn"
-images:
-  - "mcc_with_histogram_mutiplicative_normalized.png"
 ---
 
 <style>
@@ -120,6 +118,224 @@ images:
   font-weight: 700;
   font-size: 1.3rem;
 }
+
+.thesis-gallery-section {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.thesis-figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.thesis-figure figcaption {
+  color: #6b7280;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.thesis-lightbox-trigger {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  text-decoration: none;
+}
+
+.thesis-lightbox-trigger img {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.thesis-arch-preview {
+  width: min(100%, 600px);
+}
+
+.thesis-mcc-preview {
+  width: min(100%, 600px);
+}
+
+.thesis-arch-thumb {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: #f8fafc;
+  border: 2px solid #cbd5e1;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.thesis-arch-thumb:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+.thesis-arch-thumb img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.thesis-pdf-preview {
+  width: min(100%, 180px);
+}
+
+.thesis-pdf-thumb {
+  width: 100%;
+  aspect-ratio: 1 / 1.414;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 2px solid #cbd5e1;
+}
+
+.thesis-pdf-thumb:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+.thesis-pdf-icon {
+  font-size: 5rem;
+  color: #64748b;
+}
+
+.thesis-pdf-text {
+  text-align: center;
+  color: #334155;
+}
+
+.thesis-pdf-title {
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 0.15rem;
+}
+
+.thesis-pdf-subtitle {
+  font-size: 0.7rem;
+  color: #64748b;
+}
+
+.thesis-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+  z-index: 9999;
+}
+
+.thesis-lightbox:target {
+  opacity: 1;
+  visibility: visible;
+}
+
+.thesis-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+}
+
+.thesis-lightbox-content {
+  position: relative;
+  max-width: min(95vw, 1400px);
+  max-height: 95vh;
+  background: #0f172a;
+  border-radius: 16px;
+  padding: 2.5rem 2rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.thesis-lightbox-media {
+  max-width: 100%;
+  max-height: 85vh;
+  border-radius: 12px;
+}
+
+.thesis-lightbox-pdf {
+  width: min(93vw, 1350px);
+  height: 85vh;
+  border: none;
+  border-radius: 12px;
+}
+
+.thesis-lightbox-caption {
+  color: #e2e8f0;
+  font-size: 0.95rem;
+}
+
+.thesis-lightbox-close {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.75rem;
+  background: transparent;
+  border: none;
+  color: #e2e8f0;
+  font-size: 2rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.thesis-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(15, 23, 42, 0.8);
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e2e8f0;
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.thesis-lightbox-nav:hover {
+  background: rgba(15, 23, 42, 1);
+}
+
+.thesis-lightbox-nav-left {
+  left: 0.75rem;
+}
+
+.thesis-lightbox-nav-right {
+  right: 0.75rem;
+}
+
+.thesis-lightbox-download {
+  align-self: flex-start;
+  color: #38bdf8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.thesis-lightbox-download:hover {
+  text-decoration: underline;
+}
 </style>
 
 <div class="thesis-section">
@@ -148,4 +364,79 @@ Improved state-of-the-art prediction of protein-small molecule interactions by i
 <li>Showcased significantly better performance (via MCC score) for rare, underrepresented substrates, highlighting the model's potential for novel discovery.</li>
 </ul>
 </div>
+
+{{< dashboard >}}
+<div class="thesis-gallery-section" id="thesis-gallery">
+  <figure class="thesis-figure thesis-arch-preview">
+    <a class="thesis-lightbox-trigger" href="#thesis-lightbox-arch-1">
+      <div class="thesis-arch-thumb">
+        <img src="/projects/msc-thesis/thesis_architecture1.png" alt="Architecture diagram 1" />
+        <img src="/projects/msc-thesis/thesis_architecute2.png" alt="Architecture diagram 2" />
+      </div>
+    </a>
+    <figcaption>Model architecture diagrams</figcaption>
+  </figure>
+
+  <figure class="thesis-figure thesis-mcc-preview">
+    <a class="thesis-lightbox-trigger" href="#thesis-lightbox-mcc">
+      <img src="/projects/msc-thesis/mcc_with_histogram_mutiplicative_normalized.png" alt="MCC performance analysis" />
+    </a>
+    <figcaption>MCC score performance on rare substrates</figcaption>
+  </figure>
+
+  <figure class="thesis-figure thesis-pdf-preview">
+    <a class="thesis-lightbox-trigger" href="#thesis-lightbox-pdf">
+      <div class="thesis-pdf-thumb">
+        <div class="thesis-pdf-icon">📄</div>
+        <div class="thesis-pdf-text">
+          <div class="thesis-pdf-title">Master's Thesis</div>
+          <div class="thesis-pdf-subtitle">Click to view PDF</div>
+        </div>
+      </div>
+    </a>
+    <figcaption>Full thesis document</figcaption>
+  </figure>
+</div>
+{{< /dashboard >}}
+</div>
+
+<div class="thesis-lightbox" id="thesis-lightbox-arch-1" aria-hidden="true">
+  <a class="thesis-lightbox-backdrop" href="#thesis-gallery" aria-label="Close"></a>
+  <div class="thesis-lightbox-content" role="dialog" aria-modal="true">
+    <a class="thesis-lightbox-close" href="#thesis-gallery" aria-label="Close">×</a>
+    <a class="thesis-lightbox-nav thesis-lightbox-nav-right" href="#thesis-lightbox-arch-2" aria-label="Next">›</a>
+    <img class="thesis-lightbox-media" src="/projects/msc-thesis/thesis_architecture1.png" alt="Architecture diagram 1" />
+    <div class="thesis-lightbox-caption">Architecture diagram 1</div>
+  </div>
+</div>
+
+<div class="thesis-lightbox" id="thesis-lightbox-arch-2" aria-hidden="true">
+  <a class="thesis-lightbox-backdrop" href="#thesis-gallery" aria-label="Close"></a>
+  <div class="thesis-lightbox-content" role="dialog" aria-modal="true">
+    <a class="thesis-lightbox-close" href="#thesis-gallery" aria-label="Close">×</a>
+    <a class="thesis-lightbox-nav thesis-lightbox-nav-left" href="#thesis-lightbox-arch-1" aria-label="Previous">‹</a>
+    <img class="thesis-lightbox-media" src="/projects/msc-thesis/thesis_architecute2.png" alt="Architecture diagram 2" />
+    <div class="thesis-lightbox-caption">Architecture diagram 2</div>
+  </div>
+</div>
+
+<div class="thesis-lightbox" id="thesis-lightbox-mcc" aria-hidden="true">
+  <a class="thesis-lightbox-backdrop" href="#thesis-gallery" aria-label="Close"></a>
+  <div class="thesis-lightbox-content" role="dialog" aria-modal="true">
+    <a class="thesis-lightbox-close" href="#thesis-gallery" aria-label="Close">×</a>
+    <img class="thesis-lightbox-media" src="/projects/msc-thesis/mcc_with_histogram_mutiplicative_normalized.png" alt="MCC performance analysis" />
+    <div class="thesis-lightbox-caption">MCC score performance on rare substrates</div>
+  </div>
+</div>
+
+<div class="thesis-lightbox" id="thesis-lightbox-pdf" aria-hidden="true">
+  <a class="thesis-lightbox-backdrop" href="#thesis-gallery" aria-label="Close"></a>
+  <div class="thesis-lightbox-content" role="dialog" aria-modal="true">
+    <a class="thesis-lightbox-close" href="#thesis-gallery" aria-label="Close">×</a>
+    <iframe class="thesis-lightbox-pdf"
+      src="/projects/msc-thesis/FinalMasterThesis.pdf#page=1&view=FitH&zoom=page-width&toolbar=0&navpanes=0&scrollbar=0"
+      title="PDF preview"></iframe>
+    <a class="thesis-lightbox-download" href="/projects/msc-thesis/FinalMasterThesis.pdf" download>Download PDF</a>
+    <div class="thesis-lightbox-caption">Master's Thesis - Full Document</div>
+  </div>
 </div>

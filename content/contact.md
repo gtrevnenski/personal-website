@@ -7,6 +7,10 @@ type: "contact"
 layout: "contact"
 ---
 
+<div class="text-center mb-12">
+  <h1 class="text-6xl md:text-7xl font-bold text-gray-800 mb-6 font-poppins">Contact</h1>
+</div>
+
 <form action="https://formspree.io/f/mreeglld" method="POST" style="max-width:640px;margin:2rem auto;display:flex;flex-direction:column;gap:1rem;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
 <p style="margin:0 0 1rem 0;color:#4b5563;">Drop me a line and it will reach my inbox (george.trevnenski@gmail.com).</p>
 
