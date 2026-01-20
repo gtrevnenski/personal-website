@@ -22,7 +22,7 @@ jobs:
 
       - name: Update counts since last retrain
         env:
-          LAST_RETRAIN_DATE: "2025-10-19"
+          LAST_RETRAIN_DATE: "2026-01-10"
         run: python art_predictor_proj/update_recent_updates.py
 
       - name: Sync public copy (if site serves from prebuilt assets)

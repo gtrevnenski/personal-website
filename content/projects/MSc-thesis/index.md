@@ -374,14 +374,14 @@ Improved state-of-the-art prediction of protein-small molecule interactions by i
         <img src="/projects/msc-thesis/thesis_architecute2.png" alt="Architecture diagram 2" />
       </div>
     </a>
-    <figcaption>Model architecture diagrams</figcaption>
+    <figcaption>Model architecture (2 phases)</figcaption>
   </figure>
 
   <figure class="thesis-figure thesis-mcc-preview">
     <a class="thesis-lightbox-trigger" href="#thesis-lightbox-mcc">
       <img src="/projects/msc-thesis/mcc_with_histogram_mutiplicative_normalized.png" alt="MCC performance analysis" />
     </a>
-    <figcaption>MCC score performance on rare substrates</figcaption>
+    <figcaption>The model consistently outperforms the baseline (ProSmith) in classifying data points with substrates that appear in the training set a limited number of times.</figcaption>
   </figure>
 
   <figure class="thesis-figure thesis-pdf-preview">
@@ -394,7 +394,7 @@ Improved state-of-the-art prediction of protein-small molecule interactions by i
         </div>
       </div>
     </a>
-    <figcaption>Full thesis document</figcaption>
+    <figcaption>MSc Thesis Document</figcaption>
   </figure>
 </div>
 {{< /dashboard >}}
@@ -406,7 +406,7 @@ Improved state-of-the-art prediction of protein-small molecule interactions by i
     <a class="thesis-lightbox-close" href="#thesis-gallery" aria-label="Close">×</a>
     <a class="thesis-lightbox-nav thesis-lightbox-nav-right" href="#thesis-lightbox-arch-2" aria-label="Next">›</a>
     <img class="thesis-lightbox-media" src="/projects/msc-thesis/thesis_architecture1.png" alt="Architecture diagram 1" />
-    <div class="thesis-lightbox-caption">Architecture diagram 1</div>
+    <div class="thesis-lightbox-caption">Architecture diagram - first training phase</div>
   </div>
 </div>
 
@@ -416,7 +416,7 @@ Improved state-of-the-art prediction of protein-small molecule interactions by i
     <a class="thesis-lightbox-close" href="#thesis-gallery" aria-label="Close">×</a>
     <a class="thesis-lightbox-nav thesis-lightbox-nav-left" href="#thesis-lightbox-arch-1" aria-label="Previous">‹</a>
     <img class="thesis-lightbox-media" src="/projects/msc-thesis/thesis_architecute2.png" alt="Architecture diagram 2" />
-    <div class="thesis-lightbox-caption">Architecture diagram 2</div>
+    <div class="thesis-lightbox-caption">Architecture diagram - final phase</div>
   </div>
 </div>
 
@@ -425,7 +425,7 @@ Improved state-of-the-art prediction of protein-small molecule interactions by i
   <div class="thesis-lightbox-content" role="dialog" aria-modal="true">
     <a class="thesis-lightbox-close" href="#thesis-gallery" aria-label="Close">×</a>
     <img class="thesis-lightbox-media" src="/projects/msc-thesis/mcc_with_histogram_mutiplicative_normalized.png" alt="MCC performance analysis" />
-    <div class="thesis-lightbox-caption">MCC score performance on rare substrates</div>
+    <div class="thesis-lightbox-caption">The model consistently outperforms the baseline (ProSmith) in classifying data points with substrates that appear in the training set a limited number of times.</div>
   </div>
 </div>
 
@@ -437,6 +437,6 @@ Improved state-of-the-art prediction of protein-small molecule interactions by i
       src="/projects/msc-thesis/FinalMasterThesis.pdf#page=1&view=FitH&zoom=page-width&toolbar=0&navpanes=0&scrollbar=0"
       title="PDF preview"></iframe>
     <a class="thesis-lightbox-download" href="/projects/msc-thesis/FinalMasterThesis.pdf" download>Download PDF</a>
-    <div class="thesis-lightbox-caption">Master's Thesis - Full Document</div>
+    <div class="thesis-lightbox-caption">Master's Thesis</div>
   </div>
 </div>

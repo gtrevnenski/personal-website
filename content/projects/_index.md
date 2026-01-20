@@ -1,6 +1,6 @@
 ---
 title: "Projects"
-description: "Explore my data science and development projects"
+description: "Explore my ML and Data Science Projects"
 ---
 
 # My Projects

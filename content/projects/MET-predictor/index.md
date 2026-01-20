@@ -3,16 +3,41 @@ title: "MET Art Display Predictor"
 nav_label: "ML Art Curator"
 date: 2025-12-28
 draft: false
-description: "ML-powered prediction of artwork exhibition likelihood - using data from the Metropolitan Museum of Art"
+description: "Personal project modeling artwork exhibition likelihood - using data from the Metropolitan Museum of Art"
 tags: ["Gradient Boosting", "MLOps", "Data Analysis"]
 github: "https://github.com/gtrevnenski/art-display-predictor"
 ---
 
-Analysis of public data from the Metropolitan Museum of Art and a gradient boosting algorithm predicting which art piece is on view  
+<div class="met-section">
+<div class="met-objective">
+<div class="met-objective-title">Objective</div>
+<div class="met-objective-text">
+While visiting art galleries, I've always wondered what makes a piece of art valuable. Here I present a full analysis of the Metropolitan Museum of Art Open Access dataset and a Gradient Boosting model that scores artworks and learns patterns behind which pieces are selected for display. This is a data-driven perspective on the inherently subjective nature of art.
+</div>
+</div>
 
-This project uses data made available by The Metropolitan Museum of Art under the Open Access program.  
+<div class="met-subtitle">Key Responsibilities & Actions</div>
 
-MET Open Access Dataset: https://github.com/metmuseum/openaccess  
+<ul class="met-list">
+<li>Built an end-to-end pipeline: ingest MET Open Access data, clean it, and create a combined text field plus curated metadata features.</li>
+<li>Performed exploratory data analysis to understand label imbalance, department/category patterns, and to select/shape features used for modeling.</li>
+<li>Generated text embeddings with a pre-trained SentenceTransformer (all-MiniLM-L6-v2) and trained a CatBoost classifier that mixes embeddings with categorical and numeric inputs (using CatBoost's native categorical handling and class balancing).</li>
+<li>Ran hyperparameter optimization.</li>
+<li>Validated the model with evaluation and error analysis, and measured input influence via permutation tests and text ablations (dropping specific text fields and re-embedding).</li>
+<li>Deployed the trained model as a containerized FastAPI service on Google Cloud Run. It returns the probability and label. <strong>You can test it yourself below!</strong> Keep in mind the first request with take a minute to start the service.</li>
+<li>Ensured continuous updates on the Dataset analysis dashboard as an indication of the relevance of the model and need of retraining.</li>
+</ul>
+
+<div class="met-results-section">
+<div class="met-results-title">Key Results</div>
+
+<ul class="met-results-list">
+<li>Model performance is strong (see the dashboard), with results supported by error analysis and column-impact tests.</li>
+<li><strong>Department</strong> was the strongest non-text driver; shuffling it dropped PR-AUC by ~0.34 on a 1k test sample.</li>
+<li>The <strong>text embeddings</strong> contributed most of the predictive signal overall, with dates and categories adding smaller but meaningful gains.</li>
+</ul>
+</div>
+</div>
 
 {{< dashboard >}}
 <h2 style="display: none;">Dataset Analysis</h2>
@@ -143,6 +168,122 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
 </div>
 
 <style>
+  .met-section {
+    margin: 2rem 0;
+  }
+
+  .met-objective {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border-left: 4px solid #3b82f6;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+  }
+
+  .met-objective-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #1e40af;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .met-objective-title::before {
+    content: "🎯";
+    font-size: 1.3rem;
+  }
+
+  .met-objective-text {
+    color: #1e3a8a;
+    line-height: 1.7;
+  }
+
+  .met-subtitle {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #1f2937;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e5e7eb;
+  }
+
+  .met-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .met-list li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.7;
+    color: #374151;
+  }
+
+  .met-list li::before {
+    content: "▸";
+    position: absolute;
+    left: 0.5rem;
+    color: #3b82f6;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  .met-results-section {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border-left: 4px solid #10b981;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .met-results-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #065f46;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .met-results-title::before {
+    content: "✅";
+    font-size: 1.3rem;
+  }
+
+  .met-results-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .met-results-list li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    color: #064e3b;
+  }
+
+  .met-results-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0.5rem;
+    color: #10b981;
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+
+  .met-results-list li strong {
+    color: #047857;
+    font-weight: 600;
+  }
+
   .data-analysis {
     background: #ffffff;
     border: 2px solid #e5e7eb;
@@ -604,12 +745,13 @@ MET Open Access Dataset: https://github.com/metmuseum/openaccess
       // Updated since last retrain
       const updatedCount = data.updated_since_retrain?.count ?? 0;
       const updatedPct = data.updated_since_retrain?.percentage ?? 0;
-      const retrainDate = data.updated_since_retrain?.last_retrain_date || '2025-10-19';
+      const retrainDateRaw = data.updated_since_retrain?.last_retrain_date || '2025-10-19';
+      const retrainDate = new Date(retrainDateRaw);
       document.getElementById('updatedSinceRetrain').textContent = updatedCount.toLocaleString();
       document.getElementById('updatedSinceRetrainPercent').textContent =
         `(${updatedPct.toFixed(2)}%)`;
       document.getElementById('updatedSinceRetrainLabel').textContent =
-        `New and updated pieces since last retrain (${retrainDate})`;
+        `New and updated pieces since last retrain (${retrainDate.toLocaleDateString()})`;
       
       const analysisUpdated = new Date(data.last_updated || '2025-10-19');
       document.getElementById('analysisUpdateInfo').textContent =

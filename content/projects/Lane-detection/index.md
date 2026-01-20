@@ -365,7 +365,7 @@ Improve robustness of lane detection through leveraging spatiotemporal context f
     <a class="lane-lightbox-trigger" href="#lane-lightbox-architecture">
       <img src="/projects/lane-detection/model_architecture.jpg" alt="Transformer-based lane detection architecture" />
     </a>
-    <figcaption>Architecture caption placeholder</figcaption>
+    <figcaption>Model Architecture</figcaption>
   </figure>
 
   <figure class="lane-figure">
@@ -391,7 +391,7 @@ Improve robustness of lane detection through leveraging spatiotemporal context f
         </a>
       </div>
     </div>
-    <figcaption style="text-align: center;">Lane detection samples caption placeholder</figcaption>
+    <figcaption style="text-align: center;">Predicted segmentation masks with ground-truth lanes overlayed</figcaption>
   </figure>
 
   <figure class="lane-figure lane-pdf-preview">
@@ -404,7 +404,7 @@ Improve robustness of lane detection through leveraging spatiotemporal context f
         </div>
       </div>
     </a>
-    <figcaption>Robust Lane Detection - Final Report</figcaption>
+    <figcaption>Robust Lane Detection Report</figcaption>
   </figure>
 </div>
 {{< /dashboard >}}
@@ -415,7 +415,7 @@ Improve robustness of lane detection through leveraging spatiotemporal context f
   <div class="lane-lightbox-content" role="dialog" aria-modal="true">
     <a class="lane-lightbox-close" href="#lane-gallery" aria-label="Close">×</a>
     <img class="lane-lightbox-media" src="/projects/lane-detection/model_architecture.jpg" alt="Transformer-based lane detection architecture" />
-    <div class="lane-lightbox-caption">Architecture caption placeholder</div>
+    <div class="lane-lightbox-caption">Model Architecture</div>
   </div>
 </div>
 
@@ -425,7 +425,7 @@ Improve robustness of lane detection through leveraging spatiotemporal context f
     <a class="lane-lightbox-close" href="#lane-gallery" aria-label="Close">×</a>
     <a class="lane-lightbox-nav lane-lightbox-nav-right" href="#lane-lightbox-sample-2" aria-label="Next">›</a>
     <img class="lane-lightbox-media" src="/projects/lane-detection/lane_1.png" alt="Lane detection sample 1" />
-    <div class="lane-lightbox-caption">Lane sample 1 caption placeholder</div>
+    <div class="lane-lightbox-caption">Lane prediction sample 1</div>
   </div>
 </div>
 
@@ -436,7 +436,7 @@ Improve robustness of lane detection through leveraging spatiotemporal context f
     <a class="lane-lightbox-nav lane-lightbox-nav-left" href="#lane-lightbox-sample-1" aria-label="Previous">‹</a>
     <a class="lane-lightbox-nav lane-lightbox-nav-right" href="#lane-lightbox-sample-3" aria-label="Next">›</a>
     <img class="lane-lightbox-media" src="/projects/lane-detection/lane_2.png" alt="Lane detection sample 2" />
-    <div class="lane-lightbox-caption">Lane sample 2 caption placeholder</div>
+    <div class="lane-lightbox-caption">Lane prediction sample 2</div>
   </div>
 </div>
 
@@ -447,7 +447,7 @@ Improve robustness of lane detection through leveraging spatiotemporal context f
     <a class="lane-lightbox-nav lane-lightbox-nav-left" href="#lane-lightbox-sample-2" aria-label="Previous">‹</a>
     <a class="lane-lightbox-nav lane-lightbox-nav-right" href="#lane-lightbox-sample-4" aria-label="Next">›</a>
     <img class="lane-lightbox-media" src="/projects/lane-detection/lane_3.png" alt="Lane detection sample 3" />
-    <div class="lane-lightbox-caption">Lane sample 3 caption placeholder</div>
+    <div class="lane-lightbox-caption">Lane prediction sample 3</div>
   </div>
 </div>
 
@@ -457,7 +457,7 @@ Improve robustness of lane detection through leveraging spatiotemporal context f
     <a class="lane-lightbox-close" href="#lane-gallery" aria-label="Close">×</a>
     <a class="lane-lightbox-nav lane-lightbox-nav-left" href="#lane-lightbox-sample-3" aria-label="Previous">‹</a>
     <img class="lane-lightbox-media" src="/projects/lane-detection/lane_4.png" alt="Lane detection sample 4" />
-    <div class="lane-lightbox-caption">Lane sample 4 caption placeholder</div>
+    <div class="lane-lightbox-caption">Lane prediction sample 4</div>
   </div>
 </div>
 
@@ -469,6 +469,6 @@ Improve robustness of lane detection through leveraging spatiotemporal context f
       src="/projects/lane-detection/_IAAIP____Robust_Lane_Detection.pdf#page=1&view=FitH&zoom=page-width&toolbar=0&navpanes=0&scrollbar=0"
       title="PDF preview"></iframe>
     <a class="lane-lightbox-download" href="/projects/lane-detection/_IAAIP____Robust_Lane_Detection.pdf" download>Download PDF</a>
-    <div class="lane-lightbox-caption">PDF caption placeholder</div>
+    <div class="lane-lightbox-caption">Project Report</div>
   </div>
 </div>
