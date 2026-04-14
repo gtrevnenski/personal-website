@@ -23,5 +23,5 @@ logoLink = "/"
 [button]
   enabled = true
   text    = "Get my CV"
-  link    = "/files/cv.pdf"
+  link    = "/files/Georgi_Trevnenski_resume.pdf"
   target  = "_blank"
